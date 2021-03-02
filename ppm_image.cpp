@@ -157,12 +157,11 @@ ppm_image ppm_image::resize(int w, int h) const {
 
 ppm_image ppm_image::flip_horizontal() const {
     ppm_image result(*this);
-    for (int i = 0; i < result._height; ++i) {
-        ppm_pixel* row = result.pixels[i];
-        for (int j = 0; j < result._width / 2; ++j) {
-            ppm_pixel tmp = row[j];
-            row[j] = row[result._width - j - 1];
-            row[result._width - j - 1] = tmp;
+    for (int j = 0; j < result._width; ++j) {
+        for (int i = 0; i < result._height / 2; ++i) {
+            ppm_pixel tmp = result.pixels[i][j];
+            result.pixels[i][j] = result.pixels[result._height - i - 1][j];
+            result.pixels[result._height - i - 1][j] = tmp;
         }
     }
     return result;
