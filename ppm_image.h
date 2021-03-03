@@ -81,5 +81,10 @@ namespace agl {
 
         // return the height of the image
         int height() const;
+
+        // ********************* additional operations below *********************
+
+        // Return a copy of this image rotated 90 degrees
+        ppm_image rotate();
     };
 }

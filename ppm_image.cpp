@@ -267,3 +267,16 @@ int ppm_image::height() const {
 int ppm_image::width() const {
     return _width;
 }
+
+ppm_image ppm_image::rotate() {
+    ppm_image result(_height, _width);
+    result.version = version;
+    result.max_color = max_color;
+    // algorithm adapted from https://www.careercup.com/question?id=5667482614366208
+    for (int i = 0; i < _width; ++i) {
+        for (int j = 0; j < _height; ++j) {
+            result.pixels[j][_width - i - 1] = pixels[i][j];
+        }
+    }
+    return result;
+}
