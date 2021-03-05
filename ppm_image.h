@@ -86,5 +86,11 @@ namespace agl {
 
         // Return a copy of this image rotated 90 degrees
         ppm_image rotate();
+
+        // Return a copy of this image inverted
+        ppm_image invert();
+
+        // Return an image with a border of the given color and width around the current image
+        ppm_image border(const ppm_pixel &color, int width);
     };
 }

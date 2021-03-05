@@ -280,3 +280,41 @@ ppm_image ppm_image::rotate() {
     }
     return result;
 }
+
+ppm_image ppm_image::invert() {
+    ppm_image result(*this);
+    for (int i = 0; i < _height; ++i) {
+        for (int j = 0; j < _width; ++j) {
+            ppm_pixel& p = result.pixels[i][j];
+            p.r = (unsigned char) (max_color - (int) p.r);
+            p.g = (unsigned char) (max_color - (int) p.g);
+            p.b = (unsigned char) (max_color - (int) p.b);
+        }
+    }
+    return result;
+}
+
+ppm_image ppm_image::border(const ppm_pixel &color, int width) {
+    assert(width >= 0);
+
+    ppm_image result(_width + width * 2, _height + width * 2);
+    result.version = version;
+    result.max_color = max_color;
+
+    for (int i = 0; i < result._height; ++i) {
+        for (int j = 0; j < width; ++j) {
+            result.pixels[i][j] = color;
+            result.pixels[i][result._width - 1 - j] = color;
+        }
+    }
+
+    for (int j = 0; j < result._width; ++j) {
+        for (int i = 0; i < width; ++i) {
+            result.pixels[i][j] = color;
+            result.pixels[result._height - 1 - i][j] = color;
+        }
+    }
+
+    result.replace(*this, width, width);
+    return result;
+}
