@@ -1,7 +1,7 @@
 #include "ppm_image.h"
-#include <string>
 #include <fstream>
 #include <iostream>
+#include <list>
 
 using namespace agl;
 using namespace std;
@@ -317,4 +317,63 @@ ppm_image ppm_image::border(const ppm_pixel &color, int width) {
 
     result.replace(*this, width, width);
     return result;
+}
+
+ppm_image ppm_image::box_blur(int n) {
+    auto get_average = [&](const ppm_image& img, int i, int j) {
+        int sum_r = 0, sum_g = 0, sum_b = 0, count = 0;
+        int range[n];
+        for (int k = 0; k < n; ++k) {
+            range[k] = k - n / 2;
+        }
+
+        for (auto dx : range) {
+            for (auto dy : range) {
+                int x = i + dx, y = j + dy;
+                if (x >= 0 && x < _height && y >= 0 && y < _width) {
+                    sum_r += (int) img.pixels[x][y].r;
+                    sum_g += (int) img.pixels[x][y].g;
+                    sum_b += (int) img.pixels[x][y].b;
+                    count++;
+                }
+            }
+        }
+        return ppm_pixel{
+            (unsigned char) (sum_r / count),
+            (unsigned char) (sum_g / count),
+            (unsigned char) (sum_b / count)
+        };
+    };
+
+    ppm_image result(*this);
+    for (int i = 0; i < _height; ++i) {
+        for (int j = 0; j < _width; ++j) {
+            result.pixels[i][j] = get_average(result, i, j);
+        }
+    }
+    return result;
+}
+
+ppm_image ppm_image::swirl_color() {
+    ppm_image result(*this);
+    for (int i = 0; i < _height; ++i) {
+        for (int j = 0; j < _width; ++j) {
+            ppm_pixel& p = result.pixels[i][j];
+            auto tmp = p.b;
+            p.b = p.g;
+            p.g = p.r;
+            p.r = tmp;
+        }
+    }
+    return result;
+}
+
+ppm_image ppm_image::overlay(ppm_pixel color) {
+    ppm_image overlay(*this);
+    for (int i = 0; i < _height; ++i) {
+        for (int j = 0; j < _width; ++j) {
+            overlay.pixels[i][j] = color;
+        }
+    }
+    return alpha_blend(overlay, 0.5);
 }

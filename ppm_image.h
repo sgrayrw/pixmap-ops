@@ -84,13 +84,22 @@ namespace agl {
 
         // ********************* additional operations below *********************
 
-        // Return a copy of this image rotated 90 degrees
+        // Rotate 90 degrees
         ppm_image rotate();
 
-        // Return a copy of this image inverted
+        // Invert the image
         ppm_image invert();
 
-        // Return an image with a border of the given color and width around the current image
+        // Add a border around the image with given color and width
         ppm_image border(const ppm_pixel &color, int width);
+
+        // Apply n * n box blur
+        ppm_image box_blur(int n);
+
+        // Shift colors in each pixel of the image (R->G, G->B, B->R)
+        ppm_image swirl_color();
+
+        // Overlay the image with the given color
+        ppm_image overlay(ppm_pixel color);
     };
 }
