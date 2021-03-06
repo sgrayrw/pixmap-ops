@@ -76,5 +76,4 @@ image used is shown below:
 
 ## Results
 
-TODO: Show artworks using your class
-
+<img src="images/artwork.png" alt="drawing" width="350"/>
