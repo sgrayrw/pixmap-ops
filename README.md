@@ -74,6 +74,6 @@ image used is shown below:
   `ppm_image overlay(ppm_pixel color);`\
   <img src="images/overlay.png" alt="drawing" width="350"/>
 
-## Results
+## Sample Results
 
 <img src="images/artwork.png" alt="drawing" width="350"/>
