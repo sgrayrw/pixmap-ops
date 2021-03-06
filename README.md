@@ -47,30 +47,31 @@ pixmap-ops/build $ ../bin/pixmap_art
 
 Below documents six additional operators and example images, the original
 image used is shown below:
-<img src="images/cat-ascii.png="drawing" width="350"/>
+
+<img src="images/cat-ascii.png" alt="drawing" width="350"/>
 
 * Rotate 90 degrees\
-  `ppm_image rotate()`
+  `ppm_image rotate()`\
   <img src="images/rotate.png" alt="drawing" width="350"/>
 
 * Invert the image\
-  `ppm_image invert();`
+  `ppm_image invert();`\
   <img src="images/invert.png" alt="drawing" width="350"/>
 
 * Add a border around the image with given color and width\
-  `ppm_image border(const ppm_pixel &color, int width);`
+  `ppm_image border(const ppm_pixel &color, int width);`\
   <img src="images/border.png" alt="drawing" width="350"/>
 
 * Apply n * n box blur\
-  `ppm_image box_blur(int n);`
+  `ppm_image box_blur(int n);`\
   <img src="images/box_blur.png" alt="drawing" width="350"/>
 
 * Shift colors in each pixel of the image (R->G, G->B, B->R)\
-  `ppm_image swirl_color();`
+  `ppm_image swirl_color();`\
   <img src="images/swirl.png" alt="drawing" width="350"/>
 
 * Overlay the image with the given color\
-  `ppm_image overlay(ppm_pixel color);`
+  `ppm_image overlay(ppm_pixel color);`\
   <img src="images/overlay.png" alt="drawing" width="350"/>
 
 ## Results
