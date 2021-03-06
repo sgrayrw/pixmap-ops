@@ -45,7 +45,33 @@ pixmap-ops/build $ ../bin/pixmap_art
 
 ## Image operators
 
-TODO: Document the features of your PPM image class here. Include example images.
+Below documents six additional operators and example images, the original
+image used is shown below:
+![](images/cat-ascii.png)
+
+* Rotate 90 degrees\
+  `ppm_image rotate()`
+  ![](images/rotate.png)
+
+* Invert the image\
+  `ppm_image invert();`
+  ![](images/invert.png)
+
+* Add a border around the image with given color and width\
+  `ppm_image border(const ppm_pixel &color, int width);`
+  ![](images/border.png)
+
+* Apply n * n box blur\
+  `ppm_image box_blur(int n);`
+  ![](images/box_blur.png)
+
+* Shift colors in each pixel of the image (R->G, G->B, B->R)\
+  `ppm_image swirl_color();`
+  ![](images/swirl.png)
+
+* Overlay the image with the given color\
+  `ppm_image overlay(ppm_pixel color);`
+  ![](images/overlay.png)
 
 ## Results
 
